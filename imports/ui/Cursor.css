@@ -1,0 +1,21 @@
+.cursor {
+    transition: transform 0.2s;
+    /* background: black; */
+    z-index: 1000;
+    color: black;
+}
+
+.landscape .cursor {
+    font-size: 6vw;
+}
+
+.portait .cursor {
+    font-size: 6vh;
+}
+
+
+.cursor-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+}

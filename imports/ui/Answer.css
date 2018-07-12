@@ -1,0 +1,62 @@
+
+.answer-list {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: stretch;
+}
+
+.portait .answer-list {
+    flex-direction: column
+}
+
+.landscape .answer-list {
+    flex-direction: row
+}
+
+
+.answer {
+    display: block;
+    flex: 1;
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+.answer.winning {
+    background: rgba(0, 255, 234, 0.7) !important
+}
+
+h3 {
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    position: absolute;
+    text-align: center;
+    padding: 1vw;
+}
+
+.portait h3 {
+    font-size: 5vh;
+}
+
+.portait .answer.clicked h3 {
+    font-size: 4.5vh;
+}
+
+.landscape h3 {
+    font-size: 5vw;
+}
+
+.landscape .answer.clicked h3 {
+    font-size: 4.5vw;
+}
+
+.answer.winning h3 {
+    text-decoration: underline
+}
+
+.answer:hover h3 {
+    text-decoration: underline
+}
