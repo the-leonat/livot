@@ -24,7 +24,14 @@
 }
 
 .answer.winning {
-    background: rgba(0, 255, 234, 0.7) !important
+    box-shadow: 0 0 10vw 0 rgba(0,0,0,0.1);
+    background: #fff !important;
+    color:rgb(0, 0, 255);
+    z-index: 50;
+}
+
+.closed .answer:not(.winning) {
+    color: #666;
 }
 
 h3 {
@@ -38,25 +45,25 @@ h3 {
 }
 
 .portait h3 {
-    font-size: 5vh;
+    font-size: 3vh;
 }
 
-.portait .answer.clicked h3 {
-    font-size: 4.5vh;
+.running.portait .answer.clicked h3 {
+    font-size: 2.5vh;
 }
 
 .landscape h3 {
-    font-size: 5vw;
+    font-size: 3vw;
 }
 
-.landscape .answer.clicked h3 {
-    font-size: 4.5vw;
+.running.landscape .answer.clicked h3 {
+    font-size: 2.5vw;
 }
 
-.answer.winning h3 {
+.running .answer.winning h3 {
     text-decoration: underline
 }
 
-.answer:hover h3 {
+.running .answer:hover h3 {
     text-decoration: underline
 }

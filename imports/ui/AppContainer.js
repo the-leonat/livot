@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import VotingListItem from './VotingListItem.js';
 import { withTracker } from 'meteor/react-meteor-data';
+import { Link } from 'react-router-dom';
+
+import withLocalSettings from '../utils/withLocalSettings'
 import { Votings } from '../api/votings.js';
+
+import './AppContainer.css'
 
 // todo
 
@@ -16,22 +21,32 @@ class AppContainer extends Component {
 
     render() {
         return (
-            <div className="container">
-                <header>
-                <h1>Livot</h1>
-                </header>
+            <div className="container list-container landscape">
+                <div>
+                    <header>
+                        <h2>livot</h2>
+                    </header>
+                    <h2>Settings</h2>
+                    <p>
+                        Fellow voters call you by the name of _______ and you will soon be recognized by the mighty _.
+                    </p>
 
-                <ul>
-                {this.renderVotingsListItems()}
-                </ul>
+                    <h2>Votings</h2>
+                    <ul className="voting-list">
+                        {this.renderVotingsListItems()}
+                        <li>
+                            <Link to="/new">+ new</Link>
+                        </li>
+                    </ul>
+                </div>
             </div>
         );
     }
 }
 
-export default withTracker(() => {
-    Meteor.subscribe("votings")
+export default withLocalSettings(withTracker(props => {
+    Meteor.subscribe("votings", props.userId)
     return {
         votings: Votings.find({}).fetch(),
     };
-})(AppContainer);
+})(AppContainer));

@@ -12,7 +12,7 @@ class Cursor extends Component {
             <div 
                 className="cursor" 
                 style={transform}
-            >{this.props.cursorIcon}</div>
+            >{this.props.cursor.icon}</div>
         );
     }
 }

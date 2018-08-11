@@ -1,5 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check'
+import { Votings } from './votings';
 
 export const Cursors = new Mongo.Collection('voting.cursors', { idGeneration: "MONGO" });
 
@@ -14,24 +15,32 @@ if (Meteor.isServer) {
         check(_userId, String)
         // console.log(id)
 
-        return Cursors.find({ votingId: new Mongo.ObjectID(_votingId)}, {
+        return Cursors.find({ votingId: _votingId}, {
             fields: {
                 x: 1,
                 y: 1,
                 updatedAt: 1,
                 userId: 1,
-                votingId: 1
+                votingId: 1,
+                icon: 1
             }
         })
     });
 }
 
 Meteor.methods({
-    'voting.cursors.upsert'(_votingId, _userId, _x, _y) {
-        check(_votingId, Mongo.ObjectID)
+    'voting.cursors.upsert'(_votingId, _userId, _cursorIcon, _x, _y) {
+        check(_votingId, String)
         check(_userId, String)
         check(_x, Number)
         check(_y, Number)
+        check(_cursorIcon, String)
+
+        //if round is over dont update
+        let voting = Votings.findOne({ _id: _votingId})
+        if(voting == null) return
+        if(voting.isClosed()) return
+
 
         Cursors.upsert(
             { userId: _userId },
@@ -40,7 +49,8 @@ Meteor.methods({
                     votingId: _votingId, 
                     x: _x,
                     y: _y,
-                    updatedAt: new Date()
+                    updatedAt: new Date(),
+                    icon: _cursorIcon
                 }
             },
             (e,o) => { return o }

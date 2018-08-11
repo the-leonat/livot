@@ -12,7 +12,6 @@ export default class Answer extends Component {
 
     handleClick(isDown, e) {
         this.setState( { clicked: isDown } )
-        console.log(isDown)
     }
 
     render() {

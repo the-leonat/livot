@@ -18,7 +18,7 @@ export default function withLocalSettings(WrappedComponent) {
         let userId = localStorage.getItem("userId")
 
         if (userId === undefined || userId === null) {
-            userId = Random.id(6);
+            userId = Random.id(32);
             //console.log(userId)
             localStorage.setItem("userId", userId)
         }
